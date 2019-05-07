@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8426e592-0f50-4f07-a47a-1f076580e83d" name="Default Changelist" comment="" />
+    <list default="true" id="8426e592-0f50-4f07-a47a-1f076580e83d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/untitled.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/untitled.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../QuestionAnswering/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../QuestionAnswering/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -10,11 +17,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="151">
-              <caret line="182" column="12" selection-start-line="182" selection-start-column="12" selection-end-line="182" selection-end-column="12" />
+            <state relative-caret-position="237">
+              <caret line="174" selection-start-line="174" selection-end-line="174" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -23,31 +30,21 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/keras/engine/input_layer.py">
+        <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/pandas/core/generic.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1785">
-              <caret line="113" column="4" selection-start-line="113" selection-start-column="4" selection-end-line="113" selection-end-column="4" />
+            <state relative-caret-position="85">
+              <caret line="5060" selection-start-line="5060" selection-end-line="5060" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/gensim/models/utils_any2vec.py">
+        <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/keras/engine/training.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="452">
-              <caret line="395" selection-start-line="395" selection-end-line="395" />
+            <state relative-caret-position="157">
+              <caret line="38" column="18" selection-start-line="38" selection-start-column="18" selection-end-line="38" selection-end-column="18" />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/file.txt">
-          <provider selected="true" editor-type-id="LargeFileEditor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/paragram_vectors.txt">
-          <provider selected="true" editor-type-id="LargeFileEditor" />
         </entry>
       </file>
     </leaf>
@@ -64,48 +61,54 @@
       <find>test</find>
       <find>evalu</find>
       <find>epoc</find>
+      <find>mean</find>
+      <find>fit</find>
+      <find>X_train</find>
+      <find>X_test</find>
     </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/t.py" />
+        <option value="$PROJECT_DIR$/MyLayer.py" />
         <option value="$PROJECT_DIR$/test.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-9" />
-    <option name="width" value="1054" />
-    <option name="height" value="1039" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="-8" />
+    <option name="width" value="1497" />
+    <option name="height" value="1038" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="untitled" type="b2602c69:ProjectViewProjectNode" />
-              <item name="untitled" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="untitled" type="b2602c69:ProjectViewProjectNode" />
-              <item name="untitled" type="462c0819:PsiDirectoryNode" />
-              <item name="venv" type="462c0819:PsiDirectoryNode" />
+              <item name="QuestionAnswearing - MaLSTM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="QuestionAnswearing - MaLSTM" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -192,11 +195,13 @@
       <workItem from="1555312794936" duration="195000" />
       <workItem from="1555321383766" duration="3800000" />
       <workItem from="1555327886140" duration="3097000" />
+      <workItem from="1557126139934" duration="1523000" />
+      <workItem from="1557142640757" duration="4723000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23227000" />
+    <option name="totallyTimeSpent" value="29473000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -209,36 +214,54 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18766756" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.02010724" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.2446959" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.21640736" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.38896745" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.26874116" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3281471" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32956153" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.26732674" />
-      <window_info anchor="bottom" id="Python Console" order="12" weight="0.32904148" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.3281471" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.097184986" />
+      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.10924933" />
       <window_info anchor="right" id="Database" order="4" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/test.py</url>
+          <line>162</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/test.py</url>
+          <line>167</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/untitled$test.coverage" NAME="test Coverage Results" MODIFIED="1555330485404" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/untitled$t.coverage" NAME="t Coverage Results" MODIFIED="1555178113195" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/QuestionAnswearing___MaLSTM$test.coverage" NAME="test Coverage Results" MODIFIED="1557147363671" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/keras/__init__.py">
@@ -269,49 +292,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/keras/engine/training.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="1040" column="13" selection-start-line="1040" selection-start-column="8" selection-end-line="1040" selection-end-column="13" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/t.py" />
+    <entry file="file://$PROJECT_DIR$/paragram_vectors.txt" />
+    <entry file="file://$PROJECT_DIR$/file.txt">
+      <provider selected="true" editor-type-id="LargeFileEditor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/test.py">
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/gensim/models/utils_any2vec.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="182" column="12" selection-start-line="182" selection-start-column="12" selection-end-line="182" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="6290">
+          <caret line="395" selection-start-line="395" selection-end-line="395" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/keras/engine/input_layer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1785">
+        <state relative-caret-position="914">
           <caret line="113" column="4" selection-start-line="113" selection-start-column="4" selection-end-line="113" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/t.py">
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/keras/engine/sequential.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="19" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="19" />
+        <state relative-caret-position="-4000">
+          <caret line="56" column="13" selection-start-line="56" selection-start-column="10" selection-end-line="56" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/gensim/models/utils_any2vec.py">
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/keras/engine/training.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="452">
-          <caret line="395" selection-start-line="395" selection-end-line="395" />
+        <state relative-caret-position="157">
+          <caret line="38" column="18" selection-start-line="38" selection-start-column="18" selection-end-line="38" selection-end-column="18" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/paragram_vectors.txt">
-      <provider selected="true" editor-type-id="LargeFileEditor" />
+    <entry file="file://$PROJECT_DIR$/MyLayer.py">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/file.txt">
-      <provider selected="true" editor-type-id="LargeFileEditor" />
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/pandas/core/generic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5060" selection-start-line="5060" selection-end-line="5060" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="237">
+          <caret line="174" selection-start-line="174" selection-end-line="174" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
   </component>
 </project>

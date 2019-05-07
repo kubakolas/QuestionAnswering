@@ -22,8 +22,8 @@ from keras.callbacks import ModelCheckpoint
 
 
 # File paths
-TRAIN_CSV = 'C:/Users/Kociuba/Desktop/trainGoodBad2.csv'
-TEST_CSV = 'C:/Users/Kociuba/Desktop/trainGoodBad2.csv'
+TRAIN_CSV = 'C:/Users/Kociuba/Desktop/qa/QuestionAnswering/QuestionAnswering/trainGoodBad.csv'
+TEST_CSV = 'C:/Users/Kociuba/Desktop/qa/QuestionAnswering/QuestionAnswering/trainGoodBad.csv'
 EMBEDDING_FILE = 'file.txt'
 MODEL_SAVING_DIR = 'C:/Users/Kociuba/Downloads/'
 
@@ -143,7 +143,7 @@ max_seq_length = max(train_df.question1.map(lambda x: len(x)).max(),
                      test_df.question2.map(lambda x: len(x)).max())
 
 # Podział na zbiór treningowy i walidacyjny
-validation_size = 200
+validation_size = 2000
 training_size = len(train_df) - validation_size
 
 # Wskazanie co jest wejsciem - jakie nazwy kolumn z naszego pliku csv
@@ -153,6 +153,7 @@ Y = train_df['is_duplicate']
 
 # Wskazanie co jest wejsciem - jakie nazwy kolumn z naszego pliku csv
 # Co jest wyjsciem - kolumna czy jest dluplikatem
+X_test = test_df[questions_cols]
 Y_test = test_df['is_duplicate']
 
 #Rozpicie zbiru danych na podzbiory walidaci i testowy
@@ -161,7 +162,7 @@ X_train, X_validation, Y_train, Y_validation = train_test_split(X, Y, test_size=
 # Rozbicie na dwie strony, bo dwa wejscia sieci syjamskich
 X_train = {'left': X_train.question1, 'right': X_train.question2}
 X_validation = {'left': X_validation.question1, 'right': X_validation.question2}
-X_test = {'left': test_df.question1, 'right': test_df.question2}
+X_test = {'left': X_test.question1, 'right': X_test.question2}
 
 # Convert labels to their numpy representations
 Y_train = Y_train.values
@@ -172,15 +173,19 @@ Y_test = Y_test.values
 for dataset, side in itertools.product([X_train, X_validation], ['left', 'right']):
     dataset[side] = pad_sequences(dataset[side], maxlen=max_seq_length)
 
+
 # Make sure everything is ok
 assert X_train['left'].shape == X_train['right'].shape
 assert len(X_train['left']) == len(Y_train)
+
+assert X_test['left'].shape == X_test['right'].shape
+assert len(X_test['left']) == len(Y_test)
 
 # Model variables
 n_hidden = 50
 gradient_clipping_norm = 1.25
 batch_size = 64
-n_epoch = 50
+n_epoch = 1
 
 # Definiowanie funkcji jaka będzie wykorzystywana u nas w warstwie łączenia
 # Czyli w momencie porównania pytań - MaLSTM similarity function
@@ -224,13 +229,15 @@ training_start_time = time()
 malstm_trained = malstm.fit([X_train['left'], X_train['right']], Y_train, batch_size=batch_size, nb_epoch=n_epoch,
                             validation_data=([X_validation['left'], X_validation['right']], Y_validation))
 
-
+predict = malstm.predict([X_test['left'], X_test['right']])
+print('#################', predict[0])
+malstm.save('my.h5')
 
 print("Training time finished.\n{} epochs in {}".format(n_epoch, datetime.timedelta(seconds=time()-training_start_time)))
 
 
 #malstm_tested = malstm.evaluate([X_test['left'], X_test['right']], Y_test, batch_size=batch_size)
-# Evaluate the model on the test data using `evaluate`
+#Evaluate the model on the test data using `evaluate`
 #print('\n# Evaluate on test data')
 #print('test loss, test acc:', malstm_tested)
 # Plot accuracy
