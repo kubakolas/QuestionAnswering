@@ -22,10 +22,10 @@ from keras.callbacks import ModelCheckpoint
 
 
 # File paths
-TRAIN_CSV = 'C:/Users/Kociuba/Desktop/qa/QuestionAnswering/QuestionAnswering/trainGoodBad.csv'
-TEST_CSV = 'C:/Users/Kociuba/Desktop/qa/QuestionAnswering/QuestionAnswering/trainGoodBad.csv'
+TRAIN_CSV = 'trainGoodBad.csv'
+TEST_CSV = 'trainGoodBad2.csv'
 EMBEDDING_FILE = 'file.txt'
-MODEL_SAVING_DIR = 'C:/Users/Kociuba/Downloads/'
+MODEL_SAVING_DIR = 'C:/Users/Kuba/Downloads/'
 
 
 # Ładowanie danych testowych i treningowych, oba typy CVS
@@ -170,9 +170,8 @@ Y_validation = Y_validation.values
 Y_test = Y_test.values
 
 # Uzupełniene zerami, tam gdzie brakuje słów do pełnej długośći
-for dataset, side in itertools.product([X_train, X_validation], ['left', 'right']):
+for dataset, side in itertools.product([X_train, X_validation, X_test], ['left', 'right']):
     dataset[side] = pad_sequences(dataset[side], maxlen=max_seq_length)
-
 
 # Make sure everything is ok
 assert X_train['left'].shape == X_train['right'].shape
@@ -229,18 +228,8 @@ training_start_time = time()
 malstm_trained = malstm.fit([X_train['left'], X_train['right']], Y_train, batch_size=batch_size, nb_epoch=n_epoch,
                             validation_data=([X_validation['left'], X_validation['right']], Y_validation))
 
-predict = malstm.predict([X_test['left'], X_test['right']])
-print('#################', predict[0])
 malstm.save('my.h5')
-
 print("Training time finished.\n{} epochs in {}".format(n_epoch, datetime.timedelta(seconds=time()-training_start_time)))
-
-
-#malstm_tested = malstm.evaluate([X_test['left'], X_test['right']], Y_test, batch_size=batch_size)
-#Evaluate the model on the test data using `evaluate`
-#print('\n# Evaluate on test data')
-#print('test loss, test acc:', malstm_tested)
-# Plot accuracy
 plt.plot(malstm_trained.history['acc'])
 plt.plot(malstm_trained.history['val_acc'])
 plt.title('Model Accuracy')
@@ -257,3 +246,13 @@ plt.ylabel('Loss')
 plt.xlabel('Epoch')
 plt.legend(['Train', 'Validation'], loc='upper right')
 plt.show()
+
+# testowanie
+
+left = X_test['left']
+right = X_test['right']
+eval = malstm.evaluate(x=[left, right], y=Y_test, batch_size=batch_size)
+
+#Evaluate the model on the test data using `evaluate`
+print('\n# Evaluate on test data')
+print('test loss, test acc:', eval)
