@@ -5,28 +5,23 @@ from gensim.models import KeyedVectors
 import re
 from nltk.corpus import stopwords
 import nltk
-nltk.download('stopwords')
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
-import seaborn as sns
-
 import itertools
 import datetime
-
 from keras.preprocessing.sequence import pad_sequences
 from keras.models import Model
 from keras.layers import Input, Embedding, LSTM, Lambda
 import keras.backend as K
 from keras.optimizers import Adadelta
-from keras.callbacks import ModelCheckpoint
 
+nltk.download('stopwords')
 
 # File paths
-TRAIN_CSV = 'trainGoodBad.csv'
+TRAIN_CSV = 'trainSetBig.csv'
 TEST_CSV = 'trainGoodBad2.csv'
 EMBEDDING_FILE = 'file.txt'
 MODEL_SAVING_DIR = 'C:/Users/Kuba/Downloads/'
-
 
 # Ładowanie danych testowych i treningowych, oba typy CVS
 # Układ danych to pytanie1, pytanie2, czy_jest_duplikatem - treningowe
@@ -36,7 +31,6 @@ test_df = pd.read_csv(TEST_CSV)
 
 # Preprocesing tekstu - nas niedotyczy bo mamy juz obrobiony tekst
 stops = set(stopwords.words('english'))
-
 
 def text_to_word_list(text):
     ''' Pre process and convert texts to a list of words '''
@@ -251,8 +245,9 @@ plt.show()
 
 left = X_test['left']
 right = X_test['right']
-eval = malstm.evaluate(x=[left, right], y=Y_test, batch_size=batch_size)
+# eval = malstm.evaluate(x=[left, right], y=Y_test, batch_size=batch_size)
+predict = malstm.predict([left, right])
 
 #Evaluate the model on the test data using `evaluate`
 print('\n# Evaluate on test data')
-print('test loss, test acc:', eval)
+print(predict)

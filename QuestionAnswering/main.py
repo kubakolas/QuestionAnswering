@@ -6,13 +6,13 @@ import re
 stop_words = [","]
 
 def get_pickle(filename):
-	return pickle.load(open(filename, 'rb'))
+    return pickle.load(open(filename, 'rb'))
 
 def translate_sent(sent):
-	return [vocab[word] for word in sent]
+    return [vocab[word] for word in sent]
 
 def get_answer(answer_id):
-	return translate_sent(answers[answer_id])
+    return translate_sent(answers[answer_id])
 
 vocab = get_pickle('data/vocabulary')   # slowoID - slowo
 answers = get_pickle('data/answers')    # odpID - trescOdp{slowoID,...,}
@@ -54,79 +54,82 @@ dev = get_pickle('data/dev')
 
 if __name__== "__main__":
 
-	# model = Doc2Vec.load("d2vQuestions.model")
+    # model = Doc2Vec.load("d2vQuestions.model")
 
-	#to find most similar doc using tags
-	# similar_doc = model.docvecs.most_similar('1')
-	# print(similar_doc)
+    #to find most similar doc using tags
+    # similar_doc = model.docvecs.most_similar('1')
+    # print(similar_doc)
     #
-	# first_di = train[1]
-	# print(translate_sent(first_di['question']))
+    # first_di = train[1]
+    # print(translate_sent(first_di['question']))
     #
-	# first_di = train[10929]
-	# print(translate_sent(first_di['question']))
-	#to find vector of doc in training data using tags or in other words, printing the vector of document at index 1 in training data
-	# print(model.docvecs['1'])
+    # first_di = train[10929]
+    # print(translate_sent(first_di['question']))
+    #to find vector of doc in training data using tags or in other words, printing the vector of document at index 1 in training data
+    # print(model.docvecs['1'])
 
-	counter = 0
-	s = ''
-	print('Train set')
-	list = []
-	text_file = open("trainGoodBad.txt", "w")
-	for data_item in test:
-		q1 = translate_sent(data_item['question'])
-		q_string = "\""
-		q_string += " ".join(q1)
-		q_string += "\""
-		q_string += ","
-		for good in data_item['good']:
-			ans = get_answer(good)
-			ans_string = " ".join(ans)
-			ans_string = re.sub(r",", "", ans_string)
-			good_s = q_string
-			good_s += "\""
-			good_s += ans_string
-			good_s += "\""
-			good_s += ","
-			good_s += "\""
-			good_s += "1"
-			good_s += "\"\n"
-			list.append(good_s)
-			text_file.write(good_s)
-		bad_ctr = 0
-		for bad in data_item['bad']:
-			ans = get_answer(bad)
-			ans_string = " ".join(ans)
-			ans_string = re.sub(r",", "", ans_string)
-			bad_s = q_string
-			bad_s += "\""
-			bad_s += ans_string
-			bad_s += "\""
-			bad_s += ","
-			bad_s += "\""
-			bad_s += "0"
-			bad_s += "\"\n"
-			list.append(bad_s)
-			text_file.write(bad_s)
-			bad_ctr += 1
-			if bad_ctr > 5:
-				break
-		counter += 1
-	print(counter)
-	text_file.close()
+    counter = 0
+    s = ''
+    print('Train set')
+    list = []
+    text_file = open("trainSetBig.txt", "w")
+    for data_item in train:
+        q1 = translate_sent(data_item['question'])
+        q_string = "\""
+        q_string += " ".join(q1)
+        q_string += "\""
+        q_string += ","
+        for good in data_item['answers']:
+            ans = get_answer(good)
+            ans_string = " ".join(ans)
+            ans_string = re.sub(r",", "", ans_string)
+            good_s = q_string
+            good_s += "\""
+            good_s += ans_string
+            good_s += "\""
+            good_s += ","
+            good_s += "\""
+            good_s += "1"
+            good_s += "\"\n"
+            list.append(good_s)
+            text_file.write(good_s)
+        bad_ctr = 0
+        for other_question in train:
+            if q1 != other_question:
+                for bad in other_question['answers']:
+                    ans = get_answer(bad)
+                    ans_string = " ".join(ans)
+                    ans_string = re.sub(r",", "", ans_string)
+                    bad_s = q_string
+                    bad_s += "\""
+                    bad_s += ans_string
+                    bad_s += "\""
+                    bad_s += ","
+                    bad_s += "\""
+                    bad_s += "0"
+                    bad_s += "\"\n"
+                    list.append(bad_s)
+                    text_file.write(bad_s)
+                    break
+                bad_ctr += 1
+                if bad_ctr > 10:
+                    break
+    print('end')
+    text_file.close()
 
 
-		# print('Question:', q1)
-		# for answer in data_item['answers']:
-		# 	print('Answer: ', get_answer(answer))
-		# print('=================')
+        # print('Question:', q1)
+        # for answer in data_item['answers']:
+        # 	print('Answer: ', get_answer(answer))
+        # print('=================')
 
-	# print('Test set')
-	# for data_item in test:
-	# 	print('Question:', translate_sent(data_item['question']))
-	# 	for answer in data_item['good']:
-	# 		print('Good Answer: ', get_answer(answer))
-	# 	print('Bad Answer: ', get_answer(data_item['bad'][0]))
-	# 	counter += 1
-	# 	print('=================')
-	# print(counter)
+    # counter = 0
+    # print('Test set')
+    # for data_item in train:
+    # 	# print('Question:', translate_sent(data_item['question']))
+    # 	# for answer in data_item['good']:
+    # 	# 	print('Good Answer: ', get_answer(answer))
+    # 	# print('Bad Answer: ', get_answer(data_item['bad'][0]))
+    # 	counter += 1
+    # 	print('=================')
+    # print(counter)
