@@ -13,12 +13,14 @@ from keras.preprocessing.sequence import pad_sequences
 from keras.models import Model
 from keras.layers import Input, Embedding, LSTM, Lambda
 import keras.backend as K
+from keras import backend as K
 from keras.optimizers import Adadelta
+from keras.models import load_model
 
 nltk.download('stopwords')
 
 # File paths
-TRAIN_CSV = 'trainSetBig.csv'
+TRAIN_CSV = 'trainSetBig.txt'
 TEST_CSV = 'trainGoodBad2.csv'
 EMBEDDING_FILE = 'file.txt'
 MODEL_SAVING_DIR = 'C:/Users/Kuba/Downloads/'
@@ -219,35 +221,42 @@ malstm.compile(loss='mean_squared_error', optimizer=optimizer, metrics=['accurac
 # Start training
 training_start_time = time()
 
-malstm_trained = malstm.fit([X_train['left'], X_train['right']], Y_train, batch_size=batch_size, nb_epoch=n_epoch,
-                            validation_data=([X_validation['left'], X_validation['right']], Y_validation))
+# malstm_trained = malstm.fit([X_train['left'], X_train['right']], Y_train, batch_size=batch_size, nb_epoch=n_epoch,
+#                             validation_data=([X_validation['left'], X_validation['right']], Y_validation))
+#
+# malstm.save('my.h5')
+# print("Training time finished.\n{} epochs in {}".format(n_epoch, datetime.timedelta(seconds=time()-training_start_time)))
+# plt.plot(malstm_trained.history['acc'])
+# plt.plot(malstm_trained.history['val_acc'])
+# plt.title('Model Accuracy')
+# plt.ylabel('Accuracy')
+# plt.xlabel('Epoch')
+# plt.legend(['Train', 'Validation'], loc='upper left')
+# plt.show()
+#
+# # Plot loss
+# plt.plot(malstm_trained.history['loss'])
+# plt.plot(malstm_trained.history['val_loss'])
+# plt.title('Model Loss')
+# plt.ylabel('Loss')
+# plt.xlabel('Epoch')
+# plt.legend(['Train', 'Validation'], loc='upper right')
+# plt.show()
 
-malstm.save('my.h5')
-print("Training time finished.\n{} epochs in {}".format(n_epoch, datetime.timedelta(seconds=time()-training_start_time)))
-plt.plot(malstm_trained.history['acc'])
-plt.plot(malstm_trained.history['val_acc'])
-plt.title('Model Accuracy')
-plt.ylabel('Accuracy')
-plt.xlabel('Epoch')
-plt.legend(['Train', 'Validation'], loc='upper left')
-plt.show()
-
-# Plot loss
-plt.plot(malstm_trained.history['loss'])
-plt.plot(malstm_trained.history['val_loss'])
-plt.title('Model Loss')
-plt.ylabel('Loss')
-plt.xlabel('Epoch')
-plt.legend(['Train', 'Validation'], loc='upper right')
-plt.show()
 
 # testowanie
 
+# wczytywanie modelu - zamienne z trenowaniem
+malstm = load_model('my.h5', custom_objects={'exponent_neg_manhattan_distance': exponent_neg_manhattan_distance})
+
 left = X_test['left']
 right = X_test['right']
-# eval = malstm.evaluate(x=[left, right], y=Y_test, batch_size=batch_size)
+eval = malstm.evaluate(x=[left, right], y=Y_test, batch_size=batch_size)
 predict = malstm.predict([left, right])
 
 #Evaluate the model on the test data using `evaluate`
-print('\n# Evaluate on test data')
+print('\n# Predict on test data')
 print(predict)
+
+print('\n# Evaluate on test data')
+print(eval)
