@@ -42,13 +42,13 @@ del questions[0:validation_size]
 del answers[0:validation_size]
 del labels[0:validation_size]
 
-# tst_q = questions[0:validation_size]
-# tst_a = answers[0:validation_size]
-# tst_l = labels[0:validation_size]
-#
-# del questions[0:validation_size]
-# del answers[0:validation_size]
-# del labels[0:validation_size]
+tst_q = questions[len(questions)-1 - validation_size:len(questions)-1]
+tst_a = answers[len(questions)-1 - validation_size:len(questions)-1]
+tst_l = labels[len(questions)-1 - validation_size:len(questions)-1]
+
+del questions[len(questions)-1 - validation_size:len(questions)-1]
+del answers[len(questions)-1 - validation_size:len(questions)-1]
+del labels[len(questions)-1 - validation_size:len(questions)-1]
 
 #zbior treningowy
 
@@ -76,17 +76,17 @@ while i < len(val_q):
     l_valid[i, 0] = val_l[i]
     i += 1
 
-# zbior testowy - na koncu wczytujemy osobny lecz mozna wydzielic z treningowego tym kodem ponizej
-# q_test = np.random.randn( len(tst_q), 200)
-# a_test = np.random.randn( len(tst_q), 200)
-# l_test = np.random.randn( len(tst_q), 1)
-#
-# i = 0
-# while i < len(tst_q):
-#     q_test[i, :] = tst_q[i]
-#     a_test[i, :] = tst_a[i]
-#     l_test[i, 0] = tst_l[i]
-#     i += 1
+#zbior testowy - na koncu wczytujemy osobny lecz mozna wydzielic z treningowego tym kodem ponizej
+q_test = np.random.randn( len(tst_q), 200)
+a_test = np.random.randn( len(tst_q), 200)
+l_test = np.random.randn( len(tst_q), 1)
+
+i = 0
+while i < len(tst_q):
+    q_test[i, :] = tst_q[i]
+    a_test[i, :] = tst_a[i]
+    l_test[i, 0] = tst_l[i]
+    i += 1
 
 q_train = q_train.reshape(len(questions), 200, 1)
 a_train = a_train.reshape(len(questions), 200,1 )
@@ -94,16 +94,16 @@ a_train = a_train.reshape(len(questions), 200,1 )
 q_valid = q_valid.reshape(len(val_q), 200, 1)
 a_valid = a_valid.reshape(len(val_q), 200, 1)
 
-# q_test = q_test.reshape(len(tst_q), 200, 1)
-# a_test = q_test.reshape(len(tst_q), 200, 1)
+q_test = q_test.reshape(len(tst_q), 200, 1)
+a_test = a_test.reshape(len(tst_q), 200, 1)
 
 n_hidden = 50
 gradient_clipping_norm = 1.25
 batch_size = 64
-n_epoch = 10
+n_epoch = 1
 
 def exponent_neg_manhattan_distance(left, right):
-    return K.exp(-K.sum(K.abs(left-right), axis=1, keepdims=True))
+    return K.exp(-K.sum(K.abs(left-right), axis=1, keepdims=True)) + 0.4
 
 left_input = Input(shape=(200,1,))
 right_input = Input(shape=(200,1,))
@@ -118,50 +118,51 @@ malstm.compile(loss='mean_squared_error', optimizer=optimizer, metrics=['accurac
 
 
 training_start_time = time()
-malstm_trained = malstm.fit([q_train, a_train], l_train, batch_size=batch_size, epochs=n_epoch,
-                            validation_data=([q_valid, a_valid], l_valid))
-
-malstm.save('my.h5')
-print("Training time finished.\n{} epochs in {}".format(n_epoch, datetime.timedelta(seconds=time()-training_start_time)))
-plt.plot(malstm_trained.history['acc'])
-plt.plot(malstm_trained.history['val_acc'])
-plt.title('Model Accuracy')
-plt.ylabel('Accuracy')
-plt.xlabel('Epoch')
-plt.legend(['Train', 'Validation'], loc='upper left')
-plt.show()
-
-# Plot loss
-plt.plot(malstm_trained.history['loss'])
-plt.plot(malstm_trained.history['val_loss'])
-plt.title('Model Loss')
-plt.ylabel('Loss')
-plt.xlabel('Epoch')
-plt.legend(['Train', 'Validation'], loc='upper right')
-plt.show()
+# malstm_trained = malstm.fit([q_train, a_train], l_train, batch_size=batch_size, epochs=n_epoch,
+#                             validation_data=([q_valid, a_valid], l_valid))
+#
+# malstm.save('my.h5')
+# print("Training time finished.\n{} epochs in {}".format(n_epoch, datetime.timedelta(seconds=time()-training_start_time)))
+# plt.plot(malstm_trained.history['acc'])
+# plt.plot(malstm_trained.history['val_acc'])
+# plt.title('Model Accuracy')
+# plt.ylabel('Accuracy')
+# plt.xlabel('Epoch')
+# plt.legend(['Train', 'Validation'], loc='upper left')
+# plt.show()
+#
+# # Plot loss
+# plt.plot(malstm_trained.history['loss'])
+# plt.plot(malstm_trained.history['val_loss'])
+# plt.title('Model Loss')
+# plt.ylabel('Loss')
+# plt.xlabel('Epoch')
+# plt.legend(['Train', 'Validation'], loc='upper right')
+# plt.show()
 
 
 #malstm = load_model('my.h5', custom_objects={'exponent_neg_manhattan_distance': exponent_neg_manhattan_distance})
 
-questionTest = pickle.load(open("questionVecTest.p", "rb"))
-answerTest = pickle.load(open("answersVecTest.p", "rb"))
-labelsTest = pickle.load(open("labelsTest.p", "rb"))
-
-q_test = np.random.randn( len(questionTest), 200)
-a_test = np.random.randn( len(questionTest), 200)
-l_test = np.random.randn( len(questionTest), 1)
-
-i = 0
-while i < len(questionTest):
-    q_test[i, :] = questionTest[i]
-    a_test[i, :] = answerTest[i]
-    l_test[i, 0] = labelsTest[i]
-    i += 1
-
-q_test = q_test.reshape(len(questionTest), 200, 1)
-a_test = a_test.reshape(len(questionTest), 200,1)
-
-eval = malstm.evaluate(x=[q_test, a_test], y=l_test, batch_size=64)
+# questionTest = pickle.load(open("questionVecTest.p", "rb"))
+# answerTest = pickle.load(open("answersVecTest.p", "rb"))
+# labelsTest = pickle.load(open("labelsTest.p", "rb"))
+#
+# q_test = np.random.randn( len(questionTest), 200)
+# a_test = np.random.randn( len(questionTest), 200)
+# l_test = np.random.randn( len(questionTest), 1)
+#
+# i = 0
+# while i < len(questionTest):
+#     q_test[i, :] = questionTest[i]
+#     a_test[i, :] = answerTest[i]
+#     l_test[i, 0] = labelsTest[i]
+#     i += 1
+#
+# q_test = q_test.reshape(len(questionTest), 200, 1)
+# a_test = a_test.reshape(len(questionTest), 200,1)
+x = [q_test, a_test]
+y = l_test
+eval = malstm.evaluate(x=x, y=y, batch_size=64)
 predict = malstm.predict([q_test, a_test])
 
 print('\n# Predict on test data')
@@ -169,3 +170,8 @@ print(predict)
 
 print('\n# Evaluate on test data')
 print(eval)
+
+l_sum = sum(1 for i in l_test if i == 1.0)
+p_sum = sum(1 for i in predict if i > 0.5)
+
+print(l_sum)
