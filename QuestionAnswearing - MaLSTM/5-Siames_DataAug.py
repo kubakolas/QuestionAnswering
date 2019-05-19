@@ -128,7 +128,7 @@ def Siamese_Network( x1, x2, keep_prob, weights, biases):
     layer_R2 = tf.nn.relu(layer_R2)  
     
     #### combined layer  layer_L2-layer_R2
-    combined_layer= tf.concat( 1, [ layer_L2, layer_R2])
+    combined_layer= tf.concat([ layer_L2, layer_R2], 1)
     
     ### fc1
     layer_fc1= tf.nn.relu( tf.matmul( combined_layer, weights['fc1']) + biases['fc1'] )
@@ -166,7 +166,7 @@ biases = {
 pred = Siamese_Network( x1, x2, keep_prob, weights, biases)
 
 # Define loss and optimizer
-cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(pred, y))
+cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(pred, y))
 optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(cost)
 
 ## # L2 regularization for the fully connected parameters.
